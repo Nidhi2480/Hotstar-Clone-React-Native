@@ -1,6 +1,8 @@
+
 import { Text, View, StyleSheet, Image } from 'react-native';
 
-export default function AssetExample() {
+export default function Banner() {
+
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require('../../assets/starwarscard.webp')} />
