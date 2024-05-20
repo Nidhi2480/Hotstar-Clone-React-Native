@@ -1,9 +1,10 @@
 import { StyleSheet,ScrollView,Image,Pressable,FlatList} from 'react-native';
 import { Card } from 'react-native-paper';
 import Banner from '@/components/banner/Banner';
-import MoviesRow from '../banner/movierows/MoviesRow';
+import MoviesRow from '../movierows/MoviesRow';
 import { Text, View } from '@/components/Themed';
 import { StatusBar } from 'expo-status-bar';
+import ProductionHouses from '../productionhouselogos/ProductionHouses';
 
 
 const HomeView = () => {
@@ -77,20 +78,13 @@ const styles = StyleSheet.create({
         <Banner />
       </Card> 
 
-      <Pressable
+     
 
-      style={({pressed}) => [
-        {
-          backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'red',
-        },
-        styles.wrapperCustom,
-      ]}>
-      {({pressed}) => (
-        <Text style={styles.text}>{pressed ? 'Pressed!' : 'Press Me'}</Text>
-      )}
-    </Pressable>
-
-    <MoviesRow/>
+    <MoviesRow title={'Drama'} genre={'drama'}/>
+    <MoviesRow title={'Classic'} genre={'classic'}/>
+    <MoviesRow title={'Family'} genre={'family'}/>
+    <ProductionHouses/>
+    <MoviesRow title={'Western'} genre={'western'}/>
 
 
 

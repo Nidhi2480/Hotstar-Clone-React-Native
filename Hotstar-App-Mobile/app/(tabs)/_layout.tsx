@@ -2,9 +2,13 @@ import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
 import { StyleSheet,Image } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { Text, View } from '@/components/Themed';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { MaterialIcons } from '@expo/vector-icons';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -43,13 +47,14 @@ const styles = StyleSheet.create({
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: 'lightblue',
+        tabBarActiveTintColor: 'white',
         tabBarStyle:{
             backgroundColor:'black',
             height:80
         },
         headerStyle:{
-          backgroundColor:'black'
+          backgroundColor:'black',
+
         },
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
@@ -79,25 +84,34 @@ const styles = StyleSheet.create({
         name="two"
         options={{
           title:'',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <Feather name="search" size={24} color={color}  />,
         }}
       />
        <Tabs.Screen
         name="three"
         options={{
           title:'',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="movie" size={24} color={color} />,
         }}
       />
-        <Tabs.Screen
+    
+         <Tabs.Screen
         name="hbjh"
         options={{
           title:'',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <AntDesign name="download" size={24} color={color}/>,
         }}
       />
-    </Tabs>
+        <Tabs.Screen
+          name="account"
+          options={{
+            title:'',
+            tabBarIcon: ({ color }) =><MaterialCommunityIcons name="account-circle" size={24} color={color} />,
+          }}
+        />
 
+    </Tabs>
+        
     
   );
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet,Image,FlatList} from 'react-native';
 import {Text} from '@/components/Themed';
-import SampleData from '../../../data/SampleRowData'
-import {FetchMovie} from '../../../hooks/MovieFetch'
+
+import {FetchMovie} from '../../api/MovieFetch'
 interface Movie {
   id: number;
   imdbId: string;
@@ -10,12 +10,12 @@ interface Movie {
   title: string;
 }
 
-export default function MoviesRow(){
+export default function MoviesRow({title,genre}){
  
 const [isMoviesData,setMovieData]=useState<Movie[]>([])
 useEffect(()=>{
   const handleAPI=async()=>{
-    const data=await FetchMovie()
+    const data=await FetchMovie(genre)
     setMovieData(data)
   };
   handleAPI();
@@ -24,15 +24,16 @@ useEffect(()=>{
 const styles = StyleSheet.create({
     details:{
       width:130,
-      height:150,
+      height:180,
       marginRight: 8,
-      padding:10
+      padding:10,
+      borderRadius:5
     },
     smalldetails:{
       width:170,
       height:100,
       marginRight: 8},
-     heading:{
+    heading:{
       marginTop:10,
       color:'white',
       fontSize:19
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   });
     return(
         <>
-           <Text style={styles.heading}>Latest Releases</Text>
+           <Text style={styles.heading}>{title}</Text>
            <FlatList
               horizontal={true}
               data={isMoviesData}
@@ -51,15 +52,7 @@ const styles = StyleSheet.create({
                 <Image style={styles.details} source={{ uri: item.posterURL }} />
               )}
             />
-          <Text style={styles.heading}>Free Newly Added</Text>
-           <FlatList
-           horizontal={true}
-           data={SampleData}
-           keyExtractor={(item) => item.id}
-           renderItem={({ item }) => (
-             <Image style={styles.smalldetails} source={{ uri: item.name }} />
-           )}
-         />
+           
         </>
     )
 
