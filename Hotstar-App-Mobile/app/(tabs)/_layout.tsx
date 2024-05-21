@@ -53,9 +53,10 @@ const styles = StyleSheet.create({
             height:80
         },
         headerStyle:{
-          backgroundColor:'black',
+          backgroundColor:'rgba(0,0,0,0)',
 
         },
+      
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
         options={{
           title:'',
           tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />,
-          
+     
           headerRight: () => (
             <Link href="/modal" asChild>
               <Text style={styles.navText}>subscribe</Text>

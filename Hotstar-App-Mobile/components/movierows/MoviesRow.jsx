@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet,Image,FlatList} from 'react-native';
+import { StyleSheet,Image,FlatList,TouchableOpacity} from 'react-native';
+import { useNavigation } from 'expo-router';
 import {Text} from '@/components/Themed';
 
 import {FetchMovie} from '../../api/MovieFetch'
-interface Movie {
-  id: number;
-  imdbId: string;
-  posterURL: string;
-  title: string;
-}
+// interface Movie {
+//   id: number;
+//   imdbId: string;
+//   posterURL: string;
+//   title: string;
+//<Movie[]> }
 
 export default function MoviesRow({title,genre}){
- 
-const [isMoviesData,setMovieData]=useState<Movie[]>([])
+const navigation=useNavigation()
+const [isMoviesData,setMovieData]=useState([])
 useEffect(()=>{
   const handleAPI=async()=>{
     const data=await FetchMovie(genre)
@@ -49,7 +50,8 @@ const styles = StyleSheet.create({
               data={isMoviesData}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
-                <Image style={styles.details} source={{ uri: item.posterURL }} />
+                <TouchableOpacity onPress={()=>navigation.navigate('modal',{ item,genre})}>
+                <Image style={styles.details} source={{ uri: item.posterURL }} /></TouchableOpacity>
               )}
             />
            
