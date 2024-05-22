@@ -1,139 +1,156 @@
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  FlatList,
+  Pressable,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
+import { useEffect, useState } from "react";
+import { LinearGradient } from "expo-linear-gradient";
+import { SwiperFlatList } from "react-native-swiper-flatlist";
+import SampleData from "../../data/SampleRowData";
 
-import { Text, View, StyleSheet, Image ,FlatList,Pressable, Touchable, TouchableOpacity} from 'react-native';
-import { useEffect, useState } from 'react'
-import { DefaultMov } from './Default'
-import { LinearGradient } from 'expo-linear-gradient';
-import SampleData from '../../data/SampleRowData'
+const { width } = Dimensions.get("window");
 
-export default function Banner({movie}) {
-  const [isbanner,setBanner]=useState([])
-  useEffect(()=>{
-    if(movie){
-      setBanner(movie)
-    }else{
-      setBanner(SampleData[0])
-    }
-
-  },[movie]) 
-
-  const handlePress=(item)=>{
-    setBanner(item)
-
-  }
+export default function Banner({ movie }) {
+  const [isbanner, setBanner] = useState(SampleData[0]);
+  const handlePress = (item) => {
+    setBanner(item);
+  };
+  const handleChangeIndex = ({ index }) => {
+    setBanner(SampleData[index]);
+  };
   return (
-    
     <View style={styles.container}>
-      
-      <Image style={styles.banner} source={isbanner.poster?isbanner.poster:{ uri: isbanner.posterURL }}/> 
-     
-      <View style={styles.bannerdesc}>
-      <LinearGradient
-        colors={['rgba(0,0,0,0.8)', 'transparent']}
-        style={styles.background}
-      />
-      {isbanner.poster && (<FlatList
-           horizontal={true}
-           data={SampleData}
-           keyExtractor={(item) => item.id.toString()}
-           renderItem={({ item }) => (
-            <TouchableOpacity onPress={()=>handlePress(item)}>
-             <Image style={styles.logo} source={item.logo}/>
-            </TouchableOpacity>
-           )}
-           /> )}
-           <Text style={styles.details}>{`${isbanner.poster?isbanner.genre.year:'2017'} • ${isbanner.poster?isbanner.genre.length:'2h 12m'} • ${isbanner.poster?isbanner.genre.languages:'5 languages'} • ${isbanner.poster?isbanner.genre.ua:'U/A 12+'}`}</Text>
-         <View style={styles.buttons}>
-            <Pressable
-
-            style={styles.wrapperCustom}>
-            {
-            <Text style={styles.text}>{'Subscribe to watch'}</Text>
-            }
-            </Pressable>
-            <Pressable
-
-            style={styles.wrapperCustom}>
-            {
-            <Text style={styles.text}>{'+'}</Text>
-            }
-            </Pressable>
-
-         </View>
-         {!isbanner.poster && (<>
-          <Text style={styles.details}>{DefaultMov.category}</Text>
-          <Text style={styles.details}>{isbanner.title} {DefaultMov.desc}</Text></>
-         )}
-         
-         
+      <View style={styles.bannerContainer}>
+        <Image
+          style={styles.banner}
+          source={
+            isbanner.poster ? isbanner.poster : { uri: isbanner.posterURL }
+          }
+        />
+        <LinearGradient
+          colors={["transparent", "black"]}
+          style={styles.background}
+        />
       </View>
-     
+      <View style={styles.bannerdesc}>
+        {isbanner.poster && (
+          <SwiperFlatList
+            autoplay
+            autoplayLoop
+            autoplayDelay={7}
+            index={2}
+            showPagination
+            paginationStyleItemActive={styles.active}
+            paginationStyleItem={styles.notactive}
+            data={SampleData}
+            renderItem={({ item }) => (
+              <View style={styles.logobackground}>
+                <TouchableOpacity onPress={() => handlePress(item)}>
+                  <Image style={styles.logo} source={item.logo} />
+                </TouchableOpacity>
+              </View>
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            onChangeIndex={handleChangeIndex}
+          />
+        )}
+        <View style={styles.details}>
+          <Text
+            style={styles.description}
+          >{`${isbanner.genre.year} • ${isbanner.genre.length} • ${isbanner.genre.languages} • ${isbanner.genre.ua}`}</Text>
+          <View style={styles.buttons}>
+            <Pressable style={styles.wrapperCustom}>
+              {<Text style={styles.text}>{"Subscribe to watch"}</Text>}
+            </Pressable>
+            <Pressable style={styles.wrapperCustom}>
+              {<Text style={styles.text}>{"+"}</Text>}
+            </Pressable>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-
-    alignItems: 'center',
-    top:0,
-    flex:1
- 
-   },
-   bannerdesc:{
-      position:'absolute',
-      height:300,
-      width:500,
-      bottom:0,
-    
-      alignItems: 'center', 
-      backgroundColor: 'rgba(0,0,0,0.8)', 
- 
-
-   },
-   logo:{
-    objectFit:'contain',
-    borderRadius:5,
-    width:350,
-    height:200,
-    marginLeft:50
-
-   },
-   banner: {
-    objectFit:'cover',
-    borderRadius:5,
-    height:500,
-    width:500,
-   
-   
+    alignItems: "center",
+    top: 0,
+    flex: 1,
   },
-  background:{
-    position:'absolute',
-    zIndex:-1,
-    height:300
+  logobackground: {
+    width: width,
+    height: "60%",
   },
-  buttons:{
-    flexDirection:'row'
+  bannerdesc: {
+    position: "absolute",
+    height: 280,
+    width: width,
+    bottom: 0,
+    alignItems: "center",
+  },
+  logo: {
+    objectFit: "contain",
+    width: "100%",
+    height: "100%",
+  },
+  bannerContainer: {
+    alignItems: "center",
+  },
+  banner: {
+    objectFit: "cover",
+    height: 500,
+    width: width,
+  },
+  background: {
+    position: "absolute",
+    bottom: 0,
+    zIndex: 0,
+    height: 400,
+    width: 500,
+  },
+  buttons: {
+    flexDirection: "row",
   },
 
-  details:{
-    marginTop:10,
-    color:'white',
-    fontSize:19
+  description: {
+    color: "white",
+    fontSize: 19,
   },
-  wrapperCustom:{
-    margin:10,
-    paddingLeft:30,
-    paddingRight:30,
-    borderRadius:10,
-    height:50,
-    backgroundColor:' rgba(255, 255, 255, 0.3)',
-    justifyContent: 'center',
-          alignItems: 'center',
+  details: {
+    height: "45%",
+    alignItems: "center",
+  },
+  wrapperCustom: {
+    margin: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    borderRadius: 10,
+    height: 50,
+    backgroundColor: " rgba(255, 255, 255, 0.1)",
+    justifyContent: "center",
+    alignItems: "center",
 
-    color:'white' },
-    text:{
-
-      
-      color:'white'
-    }
+    color: "white",
+  },
+  text: {
+    color: "white",
+  },
+  active: {
+    height: 8,
+    width: 8,
+    borderRadius: 4,
+    backgroundColor: "white",
+  },
+  notactive: {
+    height: 8,
+    width: 8,
+    borderRadius: 4,
+    backgroundColor: "rgba(255,255,255,0.2)",
+  },
 });
