@@ -15,6 +15,7 @@ const FullMovieRowCarousel = () => {
   const styles = StyleSheet.create({
     bannerdesc: {
       flex: 1,
+      paddingVertical: 15,
     },
     posterbackground: {
       flex: 1,
@@ -23,6 +24,7 @@ const FullMovieRowCarousel = () => {
       objectFit: "cover",
       height: 170,
       width: width,
+      borderRadius: 7,
     },
     active: {
       height: 10,
