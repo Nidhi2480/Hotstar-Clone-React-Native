@@ -10,6 +10,7 @@ const ProductionHouses = () => {
 
       flexWrap: "wrap",
       marginTop: 20,
+      borderColor: "white",
     },
 
     image: {

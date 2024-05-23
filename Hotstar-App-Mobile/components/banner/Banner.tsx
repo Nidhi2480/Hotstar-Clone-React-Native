@@ -12,10 +12,11 @@ import { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import SampleData from "../../data/SampleRowData";
+import { FontAwesome } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("window");
 
-export default function Banner({ movie }) {
+export default function Banner() {
   const [isbanner, setBanner] = useState(SampleData[0]);
   const handlePress = (item) => {
     setBanner(item);
@@ -65,7 +66,12 @@ export default function Banner({ movie }) {
           >{`${isbanner.genre.year} • ${isbanner.genre.length} • ${isbanner.genre.languages} • ${isbanner.genre.ua}`}</Text>
           <View style={styles.buttons}>
             <Pressable style={styles.wrapperCustom}>
-              {<Text style={styles.text}>{"Subscribe to watch"}</Text>}
+              {
+                <Text style={styles.text}>
+                  <FontAwesome name="play" size={17} color="white" />
+                  {" Watch"} <Text style={styles.highlighttext}>Free</Text>
+                </Text>
+              }
             </Pressable>
             <Pressable style={styles.wrapperCustom}>
               {<Text style={styles.text}>{"+"}</Text>}
@@ -130,7 +136,7 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingLeft: 30,
     paddingRight: 30,
-    borderRadius: 10,
+    borderRadius: 8,
     height: 50,
     backgroundColor: " rgba(255, 255, 255, 0.1)",
     justifyContent: "center",
@@ -140,17 +146,24 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
+    fontSize: 19,
+  },
+  highlighttext: {
+    color: "lightblue",
   },
   active: {
-    height: 8,
-    width: 8,
-    borderRadius: 4,
+    height: 10,
+    width: 10,
+    borderRadius: 5,
     backgroundColor: "white",
+    marginHorizontal: 3,
   },
   notactive: {
+    marginBottom: 10,
     height: 8,
     width: 8,
     borderRadius: 4,
     backgroundColor: "rgba(255,255,255,0.2)",
+    marginHorizontal: 3,
   },
 });

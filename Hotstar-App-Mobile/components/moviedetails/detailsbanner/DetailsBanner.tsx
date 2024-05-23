@@ -14,6 +14,7 @@ import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { DefaultMov } from "@/components/banner/Default";
 const { width } = Dimensions.get("window");
+import { FontAwesome } from "@expo/vector-icons";
 
 const DetailsBanner = ({ movie }) => {
   const styles = StyleSheet.create({
@@ -23,7 +24,7 @@ const DetailsBanner = ({ movie }) => {
     },
     bannerimage: {
       height: 250,
-      borderRadius: 30,
+      borderRadius: 25,
       width: "100%",
       objectFit: "cover",
     },
@@ -46,7 +47,7 @@ const DetailsBanner = ({ movie }) => {
       paddingRight: 30,
       borderRadius: 5,
       height: 50,
-      backgroundColor: " rgba(255, 255, 255, 0.8)",
+      backgroundColor: " rgb(255, 255, 255)",
       justifyContent: "center",
       alignItems: "center",
       width: width - 30,
@@ -54,7 +55,7 @@ const DetailsBanner = ({ movie }) => {
     },
     text: {
       color: "black",
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: "bold",
     },
     movdetails: {
@@ -63,8 +64,18 @@ const DetailsBanner = ({ movie }) => {
     },
     buttons: {
       flexDirection: "row",
-      padding: 30,
+      paddingHorizontal: 30,
+      paddingTop: 30,
       gap: 50,
+    },
+    buttonstextcontainer: {
+      flexDirection: "row",
+      gap: 10,
+    },
+    buttondetails: {
+      color: "white",
+      fontSize: 14,
+      padding: 15,
     },
     link: {
       height: 90,
@@ -88,7 +99,12 @@ const DetailsBanner = ({ movie }) => {
         <Text style={styles.details}>{movie.title}</Text>
 
         <Pressable style={styles.wrapperCustom}>
-          {<Text style={styles.text}>{"Subscribe to watch"}</Text>}
+          {
+            <Text style={styles.text}>
+              <FontAwesome name="play" size={17} color="black" />
+              {" Subscribe to watch"}
+            </Text>
+          }
         </Pressable>
         <Text style={styles.details}>{DefaultMov.category}</Text>
         <Text style={styles.movdetails}>
@@ -97,8 +113,13 @@ const DetailsBanner = ({ movie }) => {
       </View>
       <View style={styles.buttons}>
         <Ionicons name="add-sharp" size={30} color="white" />
-        <Fontisto name="share-a" size={24} color="white" />
-        <FontAwesome6 name="heart" size={30} color="white" />
+        <Fontisto name="share-a" size={27} color="white" />
+        <FontAwesome6 name="heart" size={27} color="white" />
+      </View>
+      <View style={styles.buttonstextcontainer}>
+        <Text style={styles.buttondetails}>Watchlist</Text>
+        <Text style={styles.buttondetails}>Share</Text>
+        <Text style={styles.buttondetails}>Rate</Text>
       </View>
     </View>
   );

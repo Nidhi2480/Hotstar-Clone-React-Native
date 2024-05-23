@@ -12,6 +12,6 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "components/banner/Banner.jsx"
+    "components/banner/Banner.tsx"
   ]
 }
