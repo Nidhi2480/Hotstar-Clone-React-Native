@@ -7,7 +7,8 @@ import DetailsBanner from "./detailsbanner/DetailsBanner";
 
 const MovieDetails = () => {
   const route = useRoute();
-  const { item, genre } = route.params;
+  console.log(route.params);
+  const { movie, genre } = route.params;
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -23,9 +24,13 @@ const MovieDetails = () => {
     <>
       <ScrollView style={styles.container}>
         <Card style={styles.card}>
-          <DetailsBanner movie={item} />
+          <DetailsBanner movie={movie} />
         </Card>
-        <MoviesRow title={"More Like This"} genre={genre} />
+        <MoviesRow
+          small={false}
+          title={"More Like This"}
+          genre={genre === "nothing" ? "drama" : genre}
+        />
       </ScrollView>
     </>
   );

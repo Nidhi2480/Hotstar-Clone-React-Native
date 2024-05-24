@@ -32,7 +32,7 @@ const HomeView = () => {
         <FullMovieRowCarousel />
         <MoviesRow small={false} title={"Western"} genre={"western"} />
         <ProductionHouses />
-        <MoviesRow small={false} title={"Classic"} genre={"classic"} />
+        <MoviesRow small={false} title={"Mystery"} genre={"mystery"} />
       </View>
     </ScrollView>
   );

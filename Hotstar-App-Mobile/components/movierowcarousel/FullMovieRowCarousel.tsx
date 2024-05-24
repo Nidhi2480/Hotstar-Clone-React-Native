@@ -26,7 +26,16 @@ const FullMovieRowCarousel = () => {
       width: width,
       borderRadius: 7,
     },
+    logo: {
+      position: "absolute",
+      zIndex: 2,
+      objectFit: "contain",
+      height: 150,
+      width: 200,
+      left: 0,
+    },
     active: {
+      opacity: 0,
       height: 10,
       width: 10,
       borderRadius: 5,
@@ -34,6 +43,7 @@ const FullMovieRowCarousel = () => {
       marginHorizontal: 3,
     },
     notactive: {
+      opacity: 0,
       marginBottom: 10,
       height: 8,
       width: 8,
@@ -56,6 +66,7 @@ const FullMovieRowCarousel = () => {
         renderItem={({ item }) => (
           <View style={styles.posterbackground}>
             <TouchableOpacity>
+              <Image style={styles.logo} source={item.logo} />
               <Image style={styles.poster} source={item.poster} />
             </TouchableOpacity>
           </View>

@@ -90,11 +90,18 @@ const DetailsBanner = ({ movie }) => {
         <AntDesign name="close" size={35} color="white" />
       </Link>
 
-      <Image style={styles.bannerimage} source={{ uri: movie.posterURL }} />
+      <Image
+        style={styles.bannerimage}
+        source={movie.poster ? movie.poster : { uri: movie.posterURL }}
+      />
       <View style={styles.description}>
         <Image
           style={styles.bannerlogo}
-          source={require("../../../assets/productionhouselogo/hotstarsp.png")}
+          source={
+            movie.poster
+              ? movie.logo
+              : require("../../../assets/productionhouselogo/hotstarsp.png")
+          }
         />
         <Text style={styles.details}>{movie.title}</Text>
 
@@ -108,7 +115,9 @@ const DetailsBanner = ({ movie }) => {
         </Pressable>
         <Text style={styles.details}>{DefaultMov.category}</Text>
         <Text style={styles.movdetails}>
-          {movie.title} {DefaultMov.desc}
+          {movie.poster
+            ? movie.description
+            : `${movie.title} ${DefaultMov.desc}`}
         </Text>
       </View>
       <View style={styles.buttons}>

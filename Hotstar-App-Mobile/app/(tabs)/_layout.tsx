@@ -1,7 +1,6 @@
 import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
-import { StyleSheet, View, Image, Pressable, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   AntDesign,
   MaterialCommunityIcons,
@@ -9,22 +8,15 @@ import {
   Feather,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import CustomHeader from "@/components/header/CustomHeader";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
 
 export default function TabLayout() {
   const styles = StyleSheet.create({
     tabBarStyle: {
       backgroundColor: "black",
-      height: 80,
+      height: 60,
     },
   });
 
@@ -39,43 +31,43 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "",
+          tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <Entypo name="home" size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="Search"
         options={{
-          title: "",
+          tabBarLabel: "Search",
           tabBarIcon: ({ color }) => (
             <Feather name="search" size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="three"
+        name="New&Hot"
         options={{
-          title: "",
+          tabBarLabel: "New & Hot",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="movie" size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="hbjh"
+        name="Dowloads"
         options={{
-          title: "",
+          tabBarLabel: "Dowloads",
           tabBarIcon: ({ color }) => (
             <AntDesign name="download" size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="account"
+        name="Myspace"
         options={{
-          title: "",
+          tabBarLabel: "My Space",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="account-circle"

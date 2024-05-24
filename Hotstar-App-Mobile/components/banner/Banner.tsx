@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   Image,
-  FlatList,
   Pressable,
   TouchableOpacity,
   Dimensions,
@@ -13,14 +12,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import SampleData from "../../data/SampleRowData";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
 export default function Banner() {
+  const navigation = useNavigation();
   const [isbanner, setBanner] = useState(SampleData[0]);
-  const handlePress = (item) => {
-    setBanner(item);
-  };
   const handleChangeIndex = ({ index }) => {
     setBanner(SampleData[index]);
   };
@@ -51,7 +49,14 @@ export default function Banner() {
             data={SampleData}
             renderItem={({ item }) => (
               <View style={styles.logobackground}>
-                <TouchableOpacity onPress={() => handlePress(item)}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("modal", {
+                      movie: item,
+                      genre: "nothing",
+                    })
+                  }
+                >
                   <Image style={styles.logo} source={item.logo} />
                 </TouchableOpacity>
               </View>
@@ -91,7 +96,8 @@ const styles = StyleSheet.create({
   },
   logobackground: {
     width: width,
-    height: "60%",
+    height: 80,
+    margin: 0,
   },
   bannerdesc: {
     position: "absolute",
@@ -152,8 +158,8 @@ const styles = StyleSheet.create({
     color: "lightblue",
   },
   active: {
-    height: 10,
-    width: 10,
+    height: 8,
+    width: 8,
     borderRadius: 5,
     backgroundColor: "white",
     marginHorizontal: 3,

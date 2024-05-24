@@ -11,7 +11,7 @@ import { FetchMovie } from "../../api/MovieFetch";
 //   title: string;
 //<Movie[]> }
 
-export default function MoviesRow({ title, genre }) {
+export default function MoviesRow({ small, title, genre }) {
   const navigation = useNavigation();
   const [isMoviesData, setMovieData] = useState([]);
   useEffect(() => {
@@ -31,13 +31,18 @@ export default function MoviesRow({ title, genre }) {
       borderRadius: 10,
     },
     smalldetails: {
-      width: 170,
-      height: 100,
+      width: 270,
+      height: 130,
       marginRight: 8,
     },
     heading: {
       color: "white",
       fontSize: 19,
+      padding: 10,
+    },
+    movieheading: {
+      color: "white",
+      fontSize: 14,
       padding: 10,
     },
   });
@@ -50,9 +55,15 @@ export default function MoviesRow({ title, genre }) {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate("modal", { item, genre })}
+            onPress={() =>
+              navigation.navigate("modal", { movie: item, genre: genre })
+            }
           >
-            <Image style={styles.details} source={{ uri: item.posterURL }} />
+            <Image
+              style={small ? styles.smalldetails : styles.details}
+              source={{ uri: item.posterURL }}
+            />
+            {small && <Text style={styles.heading}>{item.title}</Text>}
           </TouchableOpacity>
         )}
       />

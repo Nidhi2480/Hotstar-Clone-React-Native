@@ -14,4 +14,7 @@
     "expo-env.d.ts",
     "components/banner/Banner.tsx"
   ]
+  // "linterOptions": {
+  //   "exclude": ["**/*.ts", "**/*.tsx"]
+  // }
 }
