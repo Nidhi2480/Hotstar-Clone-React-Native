@@ -1,9 +1,9 @@
 import { StyleSheet, ScrollView } from "react-native";
-import MoviesRow from "../movierows/MoviesRow";
+import MoviesRow from "../Movierows/MoviesRow";
 import { Card } from "react-native-paper";
 import { useRoute } from "@react-navigation/native";
 import React from "react";
-import DetailsBanner from "./detailsbanner/DetailsBanner";
+import DetailsBanner from "./Detailsbanner/DetailsBanner";
 
 const MovieDetails = () => {
   const route = useRoute();
@@ -12,7 +12,7 @@ const MovieDetails = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: 8,
+
       backgroundColor: "black",
     },
     card: {

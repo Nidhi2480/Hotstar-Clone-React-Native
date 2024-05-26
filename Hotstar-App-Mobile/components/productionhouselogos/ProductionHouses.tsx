@@ -14,7 +14,7 @@ const ProductionHouses = () => {
     },
 
     image: {
-      width: 133,
+      width: 113,
       height: 100,
       objectFit: "contain",
       backgroundColor: "rgba(255,255,255,0.09)",

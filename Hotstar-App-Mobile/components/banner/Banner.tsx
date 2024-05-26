@@ -32,6 +32,10 @@ export default function Banner() {
           }
         />
         <LinearGradient
+          colors={["black","transparent"]}
+          style={styles.topbackground}
+        />
+        <LinearGradient
           colors={["transparent", "black"]}
           style={styles.background}
         />
@@ -126,13 +130,21 @@ const styles = StyleSheet.create({
     height: 400,
     width: 500,
   },
+  topbackground:{
+    position: "absolute",
+    top: 0,
+    zIndex: 0,
+    height: 200,
+    width: 500,
+
+  },
   buttons: {
     flexDirection: "row",
   },
 
   description: {
     color: "white",
-    fontSize: 19,
+    fontSize: 15,
   },
   details: {
     height: "45%",
@@ -152,7 +164,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 19,
+    fontSize: 15,
   },
   highlighttext: {
     color: "lightblue",

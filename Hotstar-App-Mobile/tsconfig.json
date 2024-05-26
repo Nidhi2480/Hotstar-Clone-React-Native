@@ -12,7 +12,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "components/banner/Banner.tsx"
+    "components/Banner/Banner.tsx"
   ]
   // "linterOptions": {
   //   "exclude": ["**/*.ts", "**/*.tsx"]

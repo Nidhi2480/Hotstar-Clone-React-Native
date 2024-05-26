@@ -3,9 +3,10 @@ import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import React, { useState ,useEffect} from 'react'; 
 import "react-native-reanimated";
 
+export const Context=React.createContext();
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -43,9 +44,39 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+
+
 function RootLayoutNav() {
+  const [isfavMovies,setFavMovies]=useState([])
+  const [allMovies,setAllMovies]=useState([])
+
+  const addToAllMovies=(movies)=>{
+    setAllMovies((prevAllMovies)=>[...prevAllMovies,...movies])
+  }
+  const handleFavMovies=(id,movie,action)=>{
+    switch(action){
+      case 'add':
+        let Movie={
+          movieid:id,
+          movie:movie
+        }
+        setFavMovies((prevFavMovies)=>[...prevFavMovies,Movie])
+        console.log(isfavMovies)
+        break;
+      case 'remove':
+        setFavMovies((prevFavMovies) => prevFavMovies.filter(item => !(item.movieid === id)));
+        break;
+        default:
+          break;
+  
+    }
+
+
+  }
   return (
+    <Context.Provider value={{handleFavMovies,isfavMovies,addToAllMovies,allMovies}}>
     <ThemeProvider value={DarkTheme}>
+     
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
@@ -57,7 +88,18 @@ function RootLayoutNav() {
             gestureEnabled: true,
           }}
         />
+        <Stack.Screen
+          name="favourites"
+          options={{
+            presentation: "modal",
+            animation: "slide_from_bottom",
+            headerShown: false,
+            gestureEnabled: true,
+          }}
+        />
       </Stack>
+
     </ThemeProvider>
+    </Context.Provider>
   );
 }

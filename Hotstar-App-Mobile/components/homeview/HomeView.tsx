@@ -1,7 +1,7 @@
 import { StyleSheet, ScrollView, View, StatusBar } from "react-native";
 import { Card } from "react-native-paper";
-import Banner from "@/components/banner/Banner";
-import MoviesRow from "../movierows/MoviesRow";
+import Banner from "@/components/Banner/Banner";
+import MoviesRow from "../Movierows/MoviesRow";
 import ProductionHouses from "../productionhouselogos/ProductionHouses";
 import FullMovieRowCarousel from "../movierowcarousel/FullMovieRowCarousel";
 const HomeView = () => {

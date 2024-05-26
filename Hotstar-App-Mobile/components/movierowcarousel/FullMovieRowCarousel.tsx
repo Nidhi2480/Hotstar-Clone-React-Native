@@ -16,13 +16,14 @@ const FullMovieRowCarousel = () => {
     bannerdesc: {
       flex: 1,
       paddingVertical: 15,
+      padding:10
     },
     posterbackground: {
       flex: 1,
     },
     poster: {
       objectFit: "cover",
-      height: 170,
+      height: 150,
       width: width,
       borderRadius: 7,
     },

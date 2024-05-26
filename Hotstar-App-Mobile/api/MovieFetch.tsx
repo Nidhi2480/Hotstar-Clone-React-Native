@@ -1,5 +1,5 @@
 
-export const FetchMovie= async(genre)=>{
+export const fetchMovie= async(genre)=>{
     try{
         const response=await fetch(`https://api.sampleapis.com/movies/${genre}`)
         const json=await response.json()

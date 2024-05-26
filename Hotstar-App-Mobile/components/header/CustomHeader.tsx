@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingVertical: 25,
-    paddingHorizontal: 15,
+    paddingHorizontal: 8,
     backgroundColor: "rgba(0,0,0,0)",
     width: width,
   },
   logoContainer: {
-    width: 68,
-    height: 68,
+    width: 65,
+    height: 65,
   },
   logo: {
     width: "100%",
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   button: {
-    width: 100,
+    width: 80,
     borderWidth: 0.4,
     borderColor: "orange",
     borderRadius: 4,
@@ -56,5 +56,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "orange",
     textAlign: "center",
+    fontSize:12
   },
 });
