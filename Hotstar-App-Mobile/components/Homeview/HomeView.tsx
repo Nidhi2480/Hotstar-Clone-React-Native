@@ -1,9 +1,9 @@
 import { StyleSheet, ScrollView, View, StatusBar } from "react-native";
 import { Card } from "react-native-paper";
 import Banner from "@/components/Banner/Banner";
-import MoviesRow from "../Movierows/MoviesRow";
-import ProductionHouses from "../productionhouselogos/ProductionHouses";
-import FullMovieRowCarousel from "../movierowcarousel/FullMovieRowCarousel";
+import MoviesRow from "@/components/Movierows/MoviesRow";
+import ProductionHouses from "../Productionhouselogos/ProductionHouses";
+import FullMovieRowCarousel from "../Movierowcarousel/FullMovieRowCarousel";
 const HomeView = () => {
   const styles = StyleSheet.create({
     container: {
@@ -23,7 +23,7 @@ const HomeView = () => {
   return (
     <ScrollView style={styles.container}>
       <Card style={styles.card}>
-        <Banner />
+        <Banner small={false} />
       </Card>
       <View style={styles.movierowcontainer}>
         <MoviesRow small={false} title={"Drama"} genre={"drama"} />
@@ -32,6 +32,9 @@ const HomeView = () => {
         <FullMovieRowCarousel />
         <MoviesRow small={false} title={"Western"} genre={"western"} />
         <ProductionHouses />
+        <Card style={styles.card}>
+          <Banner small={true} />
+        </Card>
         <MoviesRow small={false} title={"Mystery"} genre={"mystery"} />
       </View>
     </ScrollView>

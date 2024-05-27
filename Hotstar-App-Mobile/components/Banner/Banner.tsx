@@ -16,7 +16,7 @@ import { useNavigation } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
-export default function Banner() {
+export default function Banner({ small }) {
   const navigation = useNavigation();
   const [isbanner, setBanner] = useState(SampleData[0]);
   const handleChangeIndex = ({ index }) => {
@@ -26,13 +26,13 @@ export default function Banner() {
     <View style={styles.container}>
       <View style={styles.bannerContainer}>
         <Image
-          style={styles.banner}
+          style={small ? styles.smallbanner : styles.banner}
           source={
             isbanner.poster ? isbanner.poster : { uri: isbanner.posterURL }
           }
         />
         <LinearGradient
-          colors={["black","transparent"]}
+          colors={["black", "transparent"]}
           style={styles.topbackground}
         />
         <LinearGradient
@@ -46,7 +46,7 @@ export default function Banner() {
             autoplay
             autoplayLoop
             autoplayDelay={7}
-            index={2}
+            index={small ? 2 : 0}
             showPagination
             paginationStyleItemActive={styles.active}
             paginationStyleItem={styles.notactive}
@@ -74,17 +74,30 @@ export default function Banner() {
             style={styles.description}
           >{`${isbanner.genre.year} • ${isbanner.genre.length} • ${isbanner.genre.languages} • ${isbanner.genre.ua}`}</Text>
           <View style={styles.buttons}>
-            <Pressable style={styles.wrapperCustom}>
-              {
-                <Text style={styles.text}>
-                  <FontAwesome name="play" size={17} color="white" />
-                  {" Watch"} <Text style={styles.highlighttext}>Free</Text>
-                </Text>
-              }
-            </Pressable>
-            <Pressable style={styles.wrapperCustom}>
-              {<Text style={styles.text}>{"+"}</Text>}
-            </Pressable>
+            {small ? (
+              <Pressable style={styles.wrapperCustom}>
+                {
+                  <Text style={styles.text}>
+                    <FontAwesome name="play" size={17} color="white" />
+                    {" Subscribe to watch"}{" "}
+                  </Text>
+                }
+              </Pressable>
+            ) : (
+              <>
+                <Pressable style={styles.wrapperCustom}>
+                  {
+                    <Text style={styles.text}>
+                      <FontAwesome name="play" size={17} color="white" />
+                      {" Watch"} <Text style={styles.highlighttext}>Free</Text>
+                    </Text>
+                  }
+                </Pressable>
+                <Pressable style={styles.wrapperCustom}>
+                  {<Text style={styles.text}>{"+"}</Text>}
+                </Pressable>
+              </>
+            )}
           </View>
         </View>
       </View>
@@ -98,6 +111,7 @@ const styles = StyleSheet.create({
     top: 0,
     flex: 1,
   },
+
   logobackground: {
     width: width,
     height: 80,
@@ -123,6 +137,11 @@ const styles = StyleSheet.create({
     height: 500,
     width: width,
   },
+  smallbanner: {
+    objectFit: "cover",
+    height: 380,
+    width: width,
+  },
   background: {
     position: "absolute",
     bottom: 0,
@@ -130,13 +149,12 @@ const styles = StyleSheet.create({
     height: 400,
     width: 500,
   },
-  topbackground:{
+  topbackground: {
     position: "absolute",
     top: 0,
     zIndex: 0,
     height: 200,
     width: 500,
-
   },
   buttons: {
     flexDirection: "row",

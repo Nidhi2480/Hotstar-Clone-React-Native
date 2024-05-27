@@ -6,9 +6,8 @@ import {
   MaterialCommunityIcons,
   Entypo,
   Feather,
-  MaterialIcons,
 } from "@expo/vector-icons";
-import CustomHeader from "@/components/header/CustomHeader";
+import CustomHeader from "@/components/Header/CustomHeader";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 
@@ -51,7 +50,11 @@ export default function TabLayout() {
         options={{
           tabBarLabel: "New & Hot",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="movie" size={24} color={color} />
+            <MaterialCommunityIcons
+              name="lightning-bolt"
+              size={24}
+              color={color}
+            />
           ),
         }}
       />

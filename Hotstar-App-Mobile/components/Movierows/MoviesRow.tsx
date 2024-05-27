@@ -1,8 +1,8 @@
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { StyleSheet, Image, FlatList, TouchableOpacity } from "react-native";
 import { useNavigation } from "expo-router";
 import { Text } from "@/components/Themed";
-import { Context } from '../../app/_layout';
+import { Context } from "../../app/_layout";
 import { fetchMovie } from "../../api/MovieFetch";
 // interface Movie {
 //   id: number;
@@ -11,25 +11,24 @@ import { fetchMovie } from "../../api/MovieFetch";
 //   title: string;
 //<Movie[]> }
 
-
 export default function MoviesRow({ small, title, genre }) {
-  const { handleFavMovies, isfavMovies,addToAllMovies } = useContext(Context);
+  const { handleFavMovies, isfavMovies, addToAllMovies } = useContext(Context);
   const navigation = useNavigation();
   const [isMoviesData, setMovieData] = useState([]);
   useEffect(() => {
     const handleAPI = async () => {
       const data = await fetchMovie(genre);
       setMovieData(data);
-      addToAllMovies(data)
+      addToAllMovies(data);
     };
     handleAPI();
   }, []);
 
   const styles = StyleSheet.create({
     details: {
-      width: 120,
+      width: 130,
       height: 160,
-      marginRight: 4,
+      marginRight: 7,
       padding: 10,
       borderRadius: 5,
     },

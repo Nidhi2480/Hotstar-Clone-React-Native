@@ -10,35 +10,31 @@ import { Link } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { DefaultMov } from "@/components/Banner/Default";
-const { width } = Dimensions.get("window");
 import { FontAwesome } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Context } from '../../../app/_layout';
-import  findFavMovies from './FindFavMovies'
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Context } from "../../../app/_layout";
+import findFavMovies from "./FindFavMovies";
+const { width } = Dimensions.get("window");
 
 const DetailsBanner = ({ movie }) => {
   const { handleFavMovies, isfavMovies } = useContext(Context);
 
-  const handlePress=(id,movie,action)=>{
-    handleFavMovies(id,movie,action);
-  }
-
-
-
+  const handlePress = (id, movie, action) => {
+    handleFavMovies(id, movie, action);
+  };
 
   const styles = StyleSheet.create({
     Banner: {
       flex: 1,
-      marginTop:45,
-      width: width - 10,
+      marginTop: 45,
+      width: width,
     },
     bannerimage: {
       height: 250,
-      borderRadius: 25,
+      borderRadius: 15,
       width: "100%",
       objectFit: "cover",
     },
@@ -84,7 +80,7 @@ const DetailsBanner = ({ movie }) => {
     },
     buttonstextcontainer: {
       flexDirection: "row",
-      gap: 20,
+      gap: 18,
     },
     buttondetails: {
       color: "white",
@@ -92,13 +88,13 @@ const DetailsBanner = ({ movie }) => {
       padding: 15,
     },
     link: {
-      position:'absolute',
-      top:0,
+      position: "absolute",
+      top: 0,
       alignSelf: "flex-end",
       padding: 20,
       zIndex: 2,
-      backgroundColor:'rgba(0,0,0,0.2)',
-      borderRadius:50
+      backgroundColor: "rgba(0,0,0,0.2)",
+      borderRadius: 50,
     },
   });
   return (
@@ -120,7 +116,6 @@ const DetailsBanner = ({ movie }) => {
               : require("../../../assets/productionhouselogo/hotstarsp.png")
           }
         />
-        <Text style={styles.details}>{movie.title}</Text>
 
         <Pressable style={styles.wrapperCustom}>
           {
@@ -141,17 +136,21 @@ const DetailsBanner = ({ movie }) => {
         <Ionicons name="add-sharp" size={30} color="white" />
         <Fontisto name="share-a" size={27} color="white" />
         <FontAwesome6 name="heart" size={27} color="white" />
-         { !findFavMovies(isfavMovies,movie.imdbId)?<Pressable onPress={()=>handlePress(movie.imdbId,movie,'add')}>
-           <MaterialCommunityIcons name="star-circle-outline" size={34} color="white" /> 
-           </Pressable>:
-           <Pressable onPress={()=>handlePress(movie.imdbId,movie,'remove')}>
-             <MaterialCommunityIcons name="star-circle-outline" size={34} color="orange" />
-             </Pressable>}
+        {!findFavMovies(isfavMovies, movie.imdbId) ? (
+          <Pressable onPress={() => handlePress(movie.imdbId, movie, "add")}>
+            <AntDesign name="star" size={34} color="white" />
+          </Pressable>
+        ) : (
+          <Pressable onPress={() => handlePress(movie.imdbId, movie, "remove")}>
+            <AntDesign name="star" size={34} color="orange" />
+          </Pressable>
+        )}
       </View>
       <View style={styles.buttonstextcontainer}>
         <Text style={styles.buttondetails}>Watchlist</Text>
         <Text style={styles.buttondetails}>Share</Text>
         <Text style={styles.buttondetails}>Rate</Text>
+        <Text style={styles.buttondetails}>Favourites</Text>
       </View>
     </View>
   );
