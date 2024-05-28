@@ -14,7 +14,6 @@ import React, { useContext } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { DefaultMov } from "@/components/Banner/Default";
 import { FontAwesome } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Context } from "../../../app/_layout";
 import findFavMovies from "./FindFavMovies";
 const { width } = Dimensions.get("window");
@@ -80,7 +79,7 @@ const DetailsBanner = ({ movie }) => {
     },
     buttonstextcontainer: {
       flexDirection: "row",
-      gap: 18,
+      gap: 17.5,
     },
     buttondetails: {
       color: "white",
@@ -133,7 +132,7 @@ const DetailsBanner = ({ movie }) => {
         </Text>
       </View>
       <View style={styles.buttons}>
-        <Ionicons name="add-sharp" size={30} color="white" />
+        <Ionicons name="add-sharp" size={27} color="white" />
         <Fontisto name="share-a" size={27} color="white" />
         <FontAwesome6 name="heart" size={27} color="white" />
         {!findFavMovies(isfavMovies, movie.imdbId) ? (

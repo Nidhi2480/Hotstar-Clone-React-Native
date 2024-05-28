@@ -12,9 +12,18 @@ import React, { useState } from "react";
 import SampleData from "../../data/SampleRowData";
 import { useNavigation } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
+import { StackNavigationProp } from "@react-navigation/stack";
+type RootStackParamList = {
+  modal: {
+    movie: any;
+    genre: string;
+  };
+};
+type NavigationProp = StackNavigationProp<RootStackParamList, "modal">;
+
 const { width } = Dimensions.get("window");
 const NewMovies = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View>
       <FlatList

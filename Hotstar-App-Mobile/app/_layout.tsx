@@ -3,10 +3,35 @@ import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, ReactNode } from "react";
 import "react-native-reanimated";
 
-export const Context = React.createContext();
+type Movie = {
+  id: any;
+  imdbId: string;
+  posterURL: string;
+  title: String;
+};
+
+type FavMovie = {
+  movieid: string;
+  movie: Movie;
+};
+
+type ContextValue = {
+  handleFavMovies: (id: string, movie: Movie, action: "add" | "remove") => void;
+  isfavMovies: FavMovie[];
+  addToAllMovies: (movies: Movie[]) => void;
+  allMovies: Movie[];
+};
+
+export const Context = createContext<ContextValue>({
+  handleFavMovies: () => {},
+  isfavMovies: [],
+  addToAllMovies: () => {},
+  allMovies: [],
+});
+
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -45,36 +70,42 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const [isfavMovies, setFavMovies] = useState([]);
-  const [allMovies, setAllMovies] = useState([]);
+  const [isfavMovies, setFavMovies] = useState<FavMovie[]>([]);
+  const [allMovies, setAllMovies] = useState<Movie[]>([]);
 
-  const addToAllMovies = (movies) => {
+  const addToAllMovies = (movies: Movie[]) => {
     const newMovies = movies.map((movie) => ({
       ...movie,
-      id: `${movie.id}${movie.imdbId}`,
+      id: `${movie.imdbId}`,
     }));
 
     setAllMovies((prevAllMovies) => [...prevAllMovies, ...newMovies]);
   };
-  const handleFavMovies = (id, movie, action) => {
+
+  const handleFavMovies = (
+    id: string,
+    movie: Movie,
+    action: "add" | "remove"
+  ) => {
     switch (action) {
       case "add":
-        let Movie = {
+        const newMovie: FavMovie = {
           movieid: id,
           movie: movie,
         };
-        setFavMovies((prevFavMovies) => [...prevFavMovies, Movie]);
+        setFavMovies((prevFavMovies) => [...prevFavMovies, newMovie]);
         console.log(isfavMovies);
         break;
       case "remove":
         setFavMovies((prevFavMovies) =>
-          prevFavMovies.filter((item) => !(item.movieid === id))
+          prevFavMovies.filter((item) => item.movieid !== id)
         );
         break;
       default:
         break;
     }
   };
+
   return (
     <Context.Provider
       value={{ handleFavMovies, isfavMovies, addToAllMovies, allMovies }}

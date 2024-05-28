@@ -1,18 +1,10 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Pressable,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import React, { useContext } from "react";
-import { useNavigation } from "expo-router";
+import { Link } from "expo-router";
 import { Context } from "../../app/_layout";
 
 const Myspace = () => {
-  const navigation = useNavigation();
-  const { handleFavMovies, isfavMovies, addToAllMovies, allMovies } =
-    useContext(Context);
+  const { isfavMovies } = useContext(Context);
   const styles = StyleSheet.create({
     favouritescontainer: {
       flex: 1,
@@ -54,20 +46,20 @@ const Myspace = () => {
         {<Text style={styles.text}>{"Login"}</Text>}
       </Pressable>
       <Text style={styles.logindesc}>Having trouble logging in? Get Help</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("favourites")}>
+      <Link href="/favourites" asChild>
         <Text
           style={{
             color: "white",
-            marginTop: 300,
+
             alignSelf: "center",
             fontSize: 22,
           }}
         >
           {isfavMovies.length > 0
             ? `${isfavMovies.length} Favourites`
-            : "Favourites"}
+            : "0 Favourites"}
         </Text>
-      </TouchableOpacity>
+      </Link>
     </View>
   );
 };

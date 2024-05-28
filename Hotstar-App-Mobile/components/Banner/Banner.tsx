@@ -7,17 +7,26 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import SampleData from "../../data/SampleRowData";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const { width } = Dimensions.get("window");
 
+type RootStackParamList = {
+  modal: {
+    movie: any;
+    genre: string;
+  };
+};
+type NavigationProp = StackNavigationProp<RootStackParamList, "modal">;
+
 export default function Banner({ small }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const [isbanner, setBanner] = useState(SampleData[0]);
   const handleChangeIndex = ({ index }) => {
     setBanner(SampleData[index]);

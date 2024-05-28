@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Tabs } from "expo-router";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import {
   AntDesign,
   MaterialCommunityIcons,
   Entypo,
   Feather,
 } from "@expo/vector-icons";
+import { Link } from "expo-router";
 import CustomHeader from "@/components/Header/CustomHeader";
+import { Context } from "../_layout";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 
 export default function TabLayout() {
+  const { handleFavMovies, isfavMovies, addToAllMovies, allMovies } =
+    useContext(Context);
   const styles = StyleSheet.create({
     tabBarStyle: {
       backgroundColor: "black",
@@ -68,6 +72,24 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="favouritestab"
+        options={{
+          tabBarLabel: "Favourites",
+          tabBarIcon: ({ color }) => (
+            <Link href="/favourites" asChild>
+              <View>
+                <AntDesign name="star" size={24} color={color} />
+                {isfavMovies.length > 0 && (
+                  <View style={styles2.badge}>
+                    <Text style={styles2.badgeText}>{isfavMovies.length}</Text>
+                  </View>
+                )}
+              </View>
+            </Link>
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="Myspace"
         options={{
           tabBarLabel: "My Space",
@@ -83,3 +105,22 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+const styles2 = StyleSheet.create({
+  badge: {
+    position: "absolute",
+    right: -12,
+    top: -5,
+    backgroundColor: "white",
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  badgeText: {
+    color: "black",
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+});

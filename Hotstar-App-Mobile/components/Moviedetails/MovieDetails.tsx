@@ -1,12 +1,17 @@
 import { StyleSheet, ScrollView } from "react-native";
 import MoviesRow from "../Movierows/MoviesRow";
 import { Card } from "react-native-paper";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, RouteProp } from "@react-navigation/native";
 import React from "react";
 import DetailsBanner from "./Detailsbanner/DetailsBanner";
 
+type RouteParams = {
+  movie: any;
+  genre: string;
+};
+
 const MovieDetails = () => {
-  const route = useRoute();
+  const route = useRoute<RouteProp<{ params: RouteParams }, "params">>();
   console.log(route.params);
   const { movie, genre } = route.params;
   const styles = StyleSheet.create({

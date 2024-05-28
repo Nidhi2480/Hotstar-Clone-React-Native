@@ -1,7 +1,8 @@
-import React from "react";
 import FavouritesView from "@/components/FavouritesView/FavouritesView";
-const favourites = () => {
+import React from "react";
+
+const favouritestab = () => {
   return <FavouritesView />;
 };
 
-export default favourites;
+export default favouritestab;

@@ -4,16 +4,19 @@ import { useNavigation } from "expo-router";
 import { Text } from "@/components/Themed";
 import { Context } from "../../app/_layout";
 import { fetchMovie } from "../../api/MovieFetch";
-// interface Movie {
-//   id: number;
-//   imdbId: string;
-//   posterURL: string;
-//   title: string;
-//<Movie[]> }
+
+import { StackNavigationProp } from "@react-navigation/stack";
+type RootStackParamList = {
+  modal: {
+    movie: any;
+    genre: string;
+  };
+};
+type NavigationProp = StackNavigationProp<RootStackParamList, "modal">;
 
 export default function MoviesRow({ small, title, genre }) {
-  const { handleFavMovies, isfavMovies, addToAllMovies } = useContext(Context);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
+  const { addToAllMovies } = useContext(Context);
   const [isMoviesData, setMovieData] = useState([]);
   useEffect(() => {
     const handleAPI = async () => {
